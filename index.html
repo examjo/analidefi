@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>analidefi · Entiende un pool antes de entrar</title>
+  <meta name="description" content="Herramienta educativa para explorar pools de liquidez y simular cuánto se podría ganar. Sin carteras ni dinero real.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 24'%3E%3Cpath d='M10 2C10 2 3 10 3 14.5a7 7 0 0 0 14 0C17 10 10 2 10 2Z' fill='%230E9F8E'/%3E%3Cpath d='M20 2c0 0-7 8-7 12.5a7 7 0 0 0 14 0C27 10 20 2 20 2Z' fill='%23F2A93B' fill-opacity='.85'/%3E%3C/svg%3E">
+  <!-- Aplica el tema guardado antes de pintar la página (evita un parpadeo). -->
+  <script>
+    try {
+      var tema = JSON.parse(localStorage.getItem("analidefi:tema"));
+      if (tema === "light" || tema === "dark") document.documentElement.dataset.theme = tema;
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+  <header class="cabecera">
+    <a class="marca" href="#inicio" aria-label="analidefi, ir al principio">
+      <!-- Logotipo propio: dos gotas que se unen. -->
+      <svg class="logo" viewBox="0 0 30 24" width="30" height="24" aria-hidden="true">
+        <path d="M10 2C10 2 3 10 3 14.5a7 7 0 0 0 14 0C17 10 10 2 10 2Z" fill="#0E9F8E"/>
+        <path d="M20 2c0 0-7 8-7 12.5a7 7 0 0 0 14 0C27 10 20 2 20 2Z" fill="#F2A93B" fill-opacity=".85"/>
+      </svg>
+      <span>analidefi</span>
+    </a>
+    <span class="lema">Entiende un pool antes de entrar</span>
+    <div class="cabecera-botones">
+      <button id="boton-tema" class="boton-icono" type="button" aria-label="Cambiar tema">
+        <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+          <circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M10 2.5a7.5 7.5 0 0 1 0 15Z" fill="currentColor"/>
+        </svg>
+      </button>
+      <button id="boton-menu" class="boton-icono solo-movil" type="button" aria-expanded="false" aria-controls="menu">Menú</button>
+    </div>
+  </header>
+
+  <div class="marco">
+    <nav id="menu" class="menu" aria-label="Secciones">
+      <a href="#inicio" data-ruta="inicio">Inicio</a>
+      <a href="#mercado" data-ruta="mercado">Mercado</a>
+      <a href="#pools" data-ruta="pools">Explorar pools</a>
+      <a href="#simulador" data-ruta="simulador">Simulador</a>
+      <a href="#historial" data-ruta="historial">Historial</a>
+      <a href="#glosario" data-ruta="glosario">Glosario</a>
+    </nav>
+
+    <div class="columna">
+      <!-- Aquí app.js pinta la pantalla que toque según el hash de la dirección. -->
+      <main id="contenido" class="contenido"></main>
+
+      <footer class="pie">
+        <p>Datos:
+          <a href="https://defillama.com/yields" target="_blank" rel="noopener">DefiLlama</a>,
+          <a href="https://www.coingecko.com" target="_blank" rel="noopener">CoinGecko</a> y
+          <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" rel="noopener">alternative.me</a>
+        </p>
+        <p>Herramienta educativa. No es asesoramiento financiero.</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- type="module" carga app.js después del HTML y permite usar import/export.
+       "?v=1" es la versión: al publicar cambios se sube a la vez aquí, en style.css y en
+       todos los import (ver CONSTRUCCION.md) para que el navegador no use archivos viejos. -->
+  <script type="module" src="app.js?v=1"></script>
+</body>
+</html>
